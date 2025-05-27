@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maison Lure | Magazin de Haine</title>
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+    <link rel="manifest" href="images/site.webmanifest">
+</head>
+
+<body>
+    <header>
+        <div class="header-left">
+            <h1>Maison Lure Magazin de Haine</h1>
+        </div>
+        <form class="search-form">
+            <input type="search" name="search" placeholder="Caută produse...">
+            <button type="submit"><i class="bx bx-search"></i></button>
+        </form>
+        <div class="header-right">
+            <a href="login.php" class="login-button"><i class="bx bxs-user"></i> Login</a>
+            <div class="cart-container">
+                <button class="cart-button"><i class="bx bxs-cart"></i><span id="cart-count"
+                        class="hidden">0</span></button>
+                <div class="cart-content">
+                    <h3>Coș de cumpărături</h3>
+                    <div id="cart-empty" class="cart-empty">
+                        <i class="bx bxs-cart empty-cart-icon"></i>
+                        <p>Coșul tău este gol. Adaugă produse pentru a începe!</p>
+                    </div>
+                    <ul id="cart-items"></ul>
+                    <div class="cart-summary">
+                        <p>Produse: <span id="item-count">0</span></p>
+                        <p>Total: <span id="cart-total">0</span> MDL</p>
+                    </div>
+                    <button class="clear-cart">Golește Coșul</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="product" style="--order: 0;">
+            <img src="https://images.asos-media.com/products/nike-premium-essentials-unisex-oversized-t-shirt-in-black/200950750-1-black?$n_480w$&wid=476&fit=constrain"
+                alt="Tricou Nike Premium">
+            <h1>Tricou Nike Premium</h1>
+            <p>Preț: 800 MDL</p>
+            <button class="buy-button" data-name="Tricou Nike Premium" data-price="800">Adaugă în Coș</button>
+        </div>
+        <div class="product" style="--order: 1;">
+            <img src="https://images.asos-media.com/products/polo-ralph-lauren-icon-logo-slim-fit-pique-polo-in-cream/207750464-1-cream?$n_480w$&wid=476&fit=constrain"
+                alt="Tricou Polo">
+            <h1>Tricou Polo</h1>
+            <p>Preț: 990 MDL</p>
+            <button class="buy-button" data-name="Tricou Polo" data-price="990">Adaugă în Coș</button>
+        </div>
+        <div class="product" style="--order: 2;">
+            <img src="https://images.asos-media.com/products/asos-design-oversized-t-shirt-in-black-with-moon-back-print/207201485-1-black?$n_480w$&wid=476&fit=constrain"
+                alt="Tricou Negru">
+            <h1>Tricou Negru</h1>
+            <p>Preț: 320 MDL</p>
+            <button class="buy-button" data-name="Tricou Negru" data-price="320">Adaugă în Coș</button>
+        </div>
+        <div class="product" style="--order: 3;">
+            <img src="https://images.asos-media.com/products/asos-design-baggy-jeans-in-washed-black/205712250-1-grey?$n_480w$&wid=476&fit=constrain"
+                alt="Blugi Largi">
+            <h1>Blugi Largi</h1>
+            <p>Preț: 650 MDL</p>
+            <button class="buy-button" data-name="Blugi Largi" data-price="650">Adaugă în Coș</button>
+        </div>
+        <div class="product" style="--order: 4;">
+            <img src="https://images.asos-media.com/products/jack-jones-relaxed-fit-linen-blend-trouser-in-white/207766598-1-white?$n_480w$&wid=476&fit=constrain"
+                alt="Pantaloni Jack & Jones">
+            <h1>Pantaloni Jack & Jones</h1>
+            <p>Preț: 650 MDL</p>
+            <button class="buy-button" data-name="Pantaloni Jack & Jones" data-price="650">Adaugă în Coș</button>
+        </div>
+        <div class="product" style="--order: 5;">
+            <img src="https://images.asos-media.com/products/collusion-x001-antifit-jeans-in-washed-black/205997661-1-washedblack?$n_480w$&wid=476&fit=constrain"
+                alt="Blugi Collusion">
+            <h1>Blugi Collusion</h1>
+            <p>Preț: 630 MDL</p>
+            <button class="buy-button" data-name="Blugi Collusion" data-price="630">Adaugă în Coș</button>
+        </div>
+        <div class="product" style="--order: 6;">
+            <img src="https://images.asos-media.com/products/asos-design-boxy-oversized-hoodie-in-grey-marl/206438782-1-greymarl?$n_480w$&wid=476&fit=constrain"
+                alt="Hanorac Dior">
+            <h1>Hanorac Dior</h1>
+            <p>Preț: 700 MDL</p>
+            <button class="buy-button" data-name="Hanorac Dior" data-price="700">Adaugă în Coș</button>
+        </div>
+        <div class="product" style="--order: 7;">
+            <img src="https://images.asos-media.com/products/weekday-oversized-hoodie-in-grey-melange/204132397-1-greymelange?$n_480w$&wid=476&fit=constrain"
+                alt="Hanorac Weekday">
+            <h1>Hanorac Weekday</h1>
+            <p>Preț: 900 MDL</p>
+            <button class="buy-button" data-name="Hanorac Weekday" data-price="900">Adaugă în Coș</button>
+        </div>
+        <div class="product" style="--order: 8;">
+            <img src="https://images.asos-media.com/products/adidas-originals-trefoil-essentials-hoodie-in-green/207194286-1-silvergreen?$n_480w$&wid=476&fit=constrain"
+                alt="Hanorac Adidas">
+            <h1>Hanorac Adidas</h1>
+            <p>Preț: 1200 MDL</p>
+            <button class="buy-button" data-name="Hanorac Adidas" data-price="1200">Adaugă în Coș</button>
+        </div>
+        <div class="product" style="--order: 9;">
+            <img src="https://images.asos-media.com/products/new-balance-9060-trainers-in-grey-and-stone/206980191-1-grey?$n_480w$&wid=476&fit=constrain"
+                alt="New Balance 9060">
+            <h1>New Balance 9060</h1>
+            <p>Preț: 3400 MDL</p>
+            <button class="buy-button" data-name="New Balance 9060" data-price="3400">Adaugă în Coș</button>
+        </div>
+        <div class="product" style="--order: 10;">
+            <img src="https://images.asos-media.com/products/nike-v2k-run-gore-tex-trainers-in-light-grey/206631060-1-lightgrey?$n_480w$&wid=476&fit=constrain"
+                alt="Nike V2K Run">
+            <h1>Nike V2K Run</h1>
+            <p>Preț: 2500 MDL</p>
+            <button class="buy-button" data-name="Nike V2K Run" data-price="2500">Adaugă în Coș</button>
+        </div>
+        <div class="product" style="--order: 11;">
+            <img src="https://images.asos-media.com/products/adidas-originals-samba-og-trainers-in-white-and-pastel-blue/205410145-1-ftwrwhitehaloblue?$n_480w$&wid=476&fit=constrain"
+                alt="Adidas Samba">
+            <h1>Adidas Samba</h1>
+            <p>Preț: 2000 MDL</p>
+            <button class="buy-button" data-name="Adidas Samba" data-price="2000">Adaugă în Coș</button>
+        </div>
+    </div>
+
+    <section class="contact-section">
+        <h1>Contact</h1>
+        <div class="contact-details">
+            <p>Telefon: +373 123 456 78</p>
+            <p>Email: <a href="mailto:contact@maisonlure.com">contact@maisonlure.com</a></p>
+            <p>Locație: Chișinău, Moldova</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2024 Magazin de Haine. Toate drepturile rezervate.</p>
+    </footer>
+
+    <script src="javascript.js"></script>
+</body>
+
+</html>
