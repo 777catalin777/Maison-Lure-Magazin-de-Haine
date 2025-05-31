@@ -9,17 +9,20 @@ $activeForm = $_SESSION['active_form'] ?? 'login';
 
 session_unset();
 
-function showError($error) {
+function showError($error)
+{
     return !empty($error) ? "<p class=\"error-message\">$error</p>" : '';
 }
 
-function isActiveForm($formName, $activeForm) {
+function isActiveForm($formName, $activeForm)
+{
     return $formName === $activeForm ? 'active' : '';
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,6 +34,7 @@ function isActiveForm($formName, $activeForm) {
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
     <link rel="manifest" href="images/favicon/site.webmanifest">
 </head>
+
 <body>
     <div class="container">
         <div class="form-box login <?= isActiveForm('login', $activeForm); ?>">
@@ -103,4 +107,5 @@ function isActiveForm($formName, $activeForm) {
     </div>
     <script src="login.js"></script>
 </body>
+
 </html>
