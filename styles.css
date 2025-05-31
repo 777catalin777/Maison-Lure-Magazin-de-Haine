@@ -920,7 +920,7 @@ footer {
 
     #cart-items li img {
         width:47px; 
-        height: 60px;
+        height: 59px;
         object-fit: contain;
         margin-right: 10px;
         border-radius: 6px;
@@ -958,7 +958,7 @@ footer {
         margin-left: 0;
         margin-top: 6px;
         gap: 6px;
-        padding-left: 68px;
+        padding-left: 66px;
         justify-content: flex-start;
     }
 
