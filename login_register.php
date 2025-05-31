@@ -37,10 +37,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($user && password_verify($password, $user['password'])) {
                 $_SESSION['name'] = $user['name'];
                 $_SESSION['email'] = $user['email'];
-                if ($user['role'] === 'admin') {
-                    header("Location: admin_page.php");
-                } else {
+                $_SESSION['role'] = $user['role'];
+                if ($user['role'] === 'user') {
                     header("Location: user_page.php");
+                } else {
+                    header("Location: admin_page.php");
                 }
                 exit();
             } else {
