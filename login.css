@@ -259,20 +259,41 @@ form {
 
 @media screen and (max-width: 400px) {
     .form-box {
-        padding: 20px;
+        padding: 15px;
     }
 
-    .toggle-panel h1 {
-        font-size: 30px;
+    .input-box input {
+        padding: 10px 40px 10px 15px;
+        font-size: 14px;
     }
-}
 
-.error-message {
-    padding: 12px;
-    background: #f8d7da;
-    border-radius: 6px;
-    font-size: 16px;
-    color: #a42834;
-    text-align: center;
-    margin-bottom: 20px;
+    .input-box i {
+        right: 15px;
+        font-size: 18px;
+    }
+
+    .btn {
+        height: 42px;
+        font-size: 14px;
+    }
+
+    .social-icons a {
+        padding: 8px;
+        font-size: 20px;
+        margin: 0 6px;
+    }
+
+    .container h1 {
+        font-size: 28px;
+    }
+
+    .error-message {
+        padding: 12px;
+        background: #f8d7da;
+        border-radius: 6px;
+        font-size: 16px;
+        color: #a42834;
+        text-align: center;
+        margin-bottom: 20px;
+    }
 }
