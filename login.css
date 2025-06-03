@@ -197,14 +197,136 @@ form {
 }
 
 .toggle-panel .btn {
-    width: 160px;
+    width: 190px;
     height: 46px;
     background: transparent;
     border: 2px solid #fff;
     box-shadow: none;
 }
 
-@media screen and (max-width: 650px) {
+.error-message {
+    padding: 12px;
+    background: #f8d7da;
+    border-radius: 6px;
+    font-size: 16px;
+    color: #a42834;
+    text-align: center;
+    margin-bottom: 20px;
+    word-wrap: break-word;
+    line-height: 1.4;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* For Mobile S (320px), Mobile M (375px), and Mobile L (425px) */
+@media screen and (max-width: 430px) {
+    .container {
+        height: calc(100vh - 40px);
+        width: 100%; /* Ensure container takes full width */
+        margin: 0; /* Remove margin for mobile */
+    }
+
+    .form-box {
+        right: 0 !important; /* Override desktop positioning */
+        bottom: 0;
+        width: 100%;
+        height: 70%;
+        padding: 20px; /* Slightly more padding for better spacing */
+    }
+
+    .container.active .form-box {
+        right: 0 !important;
+        bottom: 30%;
+    }
+
+    .toggle-box::before {
+        left: 0 !important; /* Override desktop positioning */
+        top: -270%;
+        width: 100%;
+        height: 300%;
+        border-radius: 20vw;
+    }
+
+    .container.active .toggle-box::before {
+        left: 0 !important;
+        top: 70%;
+    }
+
+    .toggle-panel {
+        width: 100%;
+        height: 30%;
+    }
+
+    .toggle-panel.toggle-left {
+        left: 0 !important; /* Override desktop positioning */
+        right: auto !important;
+        top: 0;
+    }
+
+    .container.active .toggle-panel.toggle-left {
+        left: 0 !important;
+        top: -30%;
+    }
+
+    .toggle-panel.toggle-right {
+        right: 0 !important;
+        bottom: -30%;
+    }
+
+    .container.active .toggle-panel.toggle-right {
+        right: 0 !important;
+        bottom: 0;
+    }
+
+    .input-box input {
+        padding: 10px 40px 10px 15px;
+        font-size: 14px;
+    }
+
+    .input-box i {
+        right: 15px;
+        font-size: 18px;
+    }
+
+    .btn {
+        height: 42px;
+        font-size: 14px;
+    }
+
+    .social-icons a {
+        padding: 8px;
+        font-size: 20px;
+        margin: 0 6px;
+    }
+
+    .container h1 {
+        font-size: 28px;
+    }
+
+    .toggle-panel h1 {
+        font-size: 24px; /* Reduce toggle panel header size */
+    }
+
+    .toggle-panel p {
+        font-size: 14px; /* Reduce toggle panel text size */
+    }
+
+    .toggle-panel .btn {
+        width: 150px; /* Smaller login button in toggle panel */
+        height: 40px;
+        font-size: 14px;
+    }
+
+    .error-message {
+        padding: 8px;
+        font-size: 12px;
+        margin-bottom: 12px;
+        border-radius: 4px;
+    }
+}
+
+/* For screens larger than 430px but smaller than 650px */
+@media screen and (min-width: 431px) and (max-width: 650px) {
     .container {
         height: calc(100vh - 40px);
     }
@@ -213,6 +335,7 @@ form {
         bottom: 0;
         width: 100%;
         height: 70%;
+        padding: 20px;
     }
 
     .container.active .form-box {
@@ -255,45 +378,10 @@ form {
     .container.active .toggle-panel.toggle-right {
         bottom: 0;
     }
-}
-
-@media screen and (max-width: 400px) {
-    .form-box {
-        padding: 15px;
-    }
-
-    .input-box input {
-        padding: 10px 40px 10px 15px;
-        font-size: 14px;
-    }
-
-    .input-box i {
-        right: 15px;
-        font-size: 18px;
-    }
-
-    .btn {
-        height: 42px;
-        font-size: 14px;
-    }
-
-    .social-icons a {
-        padding: 8px;
-        font-size: 20px;
-        margin: 0 6px;
-    }
-
-    .container h1 {
-        font-size: 28px;
-    }
 
     .error-message {
-        padding: 12px;
-        background: #f8d7da;
-        border-radius: 6px;
-        font-size: 16px;
-        color: #a42834;
-        text-align: center;
-        margin-bottom: 20px;
+        padding: 10px;
+        font-size: 14px;
+        margin-bottom: 15px;
     }
 }
