@@ -218,20 +218,19 @@ form {
     box-sizing: border-box;
 }
 
-/* For Mobile S (320px), Mobile M (375px), and Mobile L (425px) */
 @media screen and (max-width: 430px) {
     .container {
         height: calc(100vh - 40px);
-        width: 100%; /* Ensure container takes full width */
-        margin: 0; /* Remove margin for mobile */
+        width: 100%;
+        margin: 0;
     }
 
     .form-box {
-        right: 0 !important; /* Override desktop positioning */
+        right: 0 !important;
         bottom: 0;
         width: 100%;
         height: 70%;
-        padding: 20px; /* Slightly more padding for better spacing */
+        padding: 20px;
     }
 
     .container.active .form-box {
@@ -240,7 +239,7 @@ form {
     }
 
     .toggle-box::before {
-        left: 0 !important; /* Override desktop positioning */
+        left: 0 !important;
         top: -270%;
         width: 100%;
         height: 300%;
@@ -258,7 +257,7 @@ form {
     }
 
     .toggle-panel.toggle-left {
-        left: 0 !important; /* Override desktop positioning */
+        left: 0 !important;
         right: auto !important;
         top: 0;
     }
@@ -304,15 +303,15 @@ form {
     }
 
     .toggle-panel h1 {
-        font-size: 24px; /* Reduce toggle panel header size */
+        font-size: 24px;
     }
 
     .toggle-panel p {
-        font-size: 14px; /* Reduce toggle panel text size */
+        font-size: 14px;
     }
 
     .toggle-panel .btn {
-        width: 150px; /* Smaller login button in toggle panel */
+        width: 150px;
         height: 40px;
         font-size: 14px;
     }
@@ -325,7 +324,6 @@ form {
     }
 }
 
-/* For screens larger than 430px but smaller than 650px */
 @media screen and (min-width: 431px) and (max-width: 650px) {
     .container {
         height: calc(100vh - 40px);
