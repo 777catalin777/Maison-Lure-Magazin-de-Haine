@@ -10,24 +10,21 @@ document.addEventListener("DOMContentLoaded", function () {
   const clearCartButton = document.querySelector(".clear-cart");
   const noResultsMessage = document.querySelector(".no-results");
 
-  // Function to show notification
   function showNotification(message) {
     const notification = document.createElement("div");
     notification.className = "notification";
     notification.textContent = message;
     document.body.appendChild(notification);
 
-    // Trigger animation
     setTimeout(() => {
       notification.classList.add("show");
     }, 100);
 
-    // Remove notification after 3 seconds
     setTimeout(() => {
       notification.classList.remove("show");
       setTimeout(() => {
         notification.remove();
-      }, 300); // Match the CSS transition duration
+      }, 300);
     }, 3000);
   }
 

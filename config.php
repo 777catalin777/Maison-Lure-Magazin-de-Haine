@@ -1,4 +1,3 @@
-config.php
 <?php
 $servername = "localhost";
 $username = "root";

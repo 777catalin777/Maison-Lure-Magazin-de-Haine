@@ -30,4 +30,3 @@ if ($_SESSION['role'] !== 'user') {
     </div>
 </body>
 </html>
-</html>
