@@ -1,164 +1,142 @@
 document.addEventListener("DOMContentLoaded", function () {
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-  const cartDisplay = document.getElementById("cart-count");
-  const cartItems = document.getElementById("cart-items");
-  const cartTotal = document.getElementById("cart-total");
-  const itemCount = document.getElementById("item-count");
-  const cartButton = document.querySelector(".cart-button");
-  const cartContent = document.querySelector(".cart-content");
-  const clearCartButton = document.querySelector(".clear-cart");
-  const noResultsMessage = document.querySelector(".no-results");
+    const cartDisplay = document.getElementById("cart-count");
+    const cartItems = document.getElementById("cart-items");
+    const cartTotal = document.getElementById("cart-total");
+    const itemCount = document.getElementById("item-count");
+    const cartButton = document.querySelector(".cart-button");
+    const cartContent = document.querySelector(".cart-content");
+    const clearCartButton = document.querySelector(".clear-cart");
 
-  function showNotification(message) {
-    const notification = document.createElement("div");
-    notification.className = "notification";
-    notification.textContent = message;
-    document.body.appendChild(notification);
+    window.currentLang = document.documentElement.lang || 'ro';
 
-    setTimeout(() => {
-      notification.classList.add("show");
-    }, 100);
+    function t(key) {
+        const translations = {
+            ro: { cart: "Coș de cumpărături", empty_cart: "Coșul tău este gol. Adaugă produse pentru a începe!", products: "Produse", total: "Total", clear_cart: "Golește Coșul", added_to_cart: "Produsul a fost adăugat în coș!", quantity: "Cantitate" },
+            en: { cart: "Shopping Cart", empty_cart: "Your cart is empty. Add products to get started!", products: "Products", total: "Total", clear_cart: "Clear Cart", added_to_cart: "Product added to cart!", quantity: "Quantity" },
+            ru: { cart: "Корзина", empty_cart: "Ваша корзина пуста. Добавьте товары!", products: "Товары", total: "Итого", clear_cart: "Очистить корзину", added_to_cart: "Товар добавлен в корзину!", quantity: "Количество" }
+        };
+        return translations[window.currentLang][key] || key;
+    }
 
-    setTimeout(() => {
-      notification.classList.remove("show");
-      setTimeout(() => {
-        notification.remove();
-      }, 300);
-    }, 3000);
-  }
+    function getProductName(key) {
+        if (window.productNames && window.productNames[key]) {
+            return window.productNames[key];
+        }
 
-  function updateCart() {
-    const totalQuantity = cart.reduce((sum, item) => sum + item.quantity, 0);
-    cartDisplay.textContent = totalQuantity;
-    itemCount.textContent = totalQuantity;
-    cartDisplay.classList.toggle("hidden", totalQuantity === 0);
-    cartItems.innerHTML = "";
-    let total = 0;
+        const product = document.querySelector(`.buy-button[data-key="${key}"]`);
+        if (product) {
+            const h1 = product.closest(".product").querySelector("h1");
+            if (h1) return h1.textContent.trim();
+        }
+        return "Produs";
+    }
 
-    const groupedItems = cart.reduce((acc, item) => {
-      const existingItem = acc.find(i => i.name.toLowerCase() === item.name.toLowerCase());
-      if (existingItem) {
-        existingItem.quantity += item.quantity;
-        existingItem.totalPrice = item.price * existingItem.quantity;
-      } else {
-        acc.push({ ...item, totalPrice: item.price * item.quantity });
-      }
-      return acc;
-    }, []);
+    function showNotification(message) {
+        const notification = document.createElement("div");
+        notification.className = "notification";
+        notification.textContent = message;
+        document.body.appendChild(notification);
+        setTimeout(() => notification.classList.add("show"), 10);
+        setTimeout(() => {
+            notification.classList.remove("show");
+            setTimeout(() => notification.remove(), 300);
+        }, 3000);
+    }
 
-    const cartEmpty = document.getElementById("cart-empty");
-    cartEmpty.style.display = totalQuantity === 0 ? "block" : "none";
-    cartItems.style.display = totalQuantity === 0 ? "none" : "block";
+    function updateCart() {
+        const totalQuantity = cart.reduce((sum, item) => sum + (item.quantity || 0), 0);
+        cartDisplay.textContent = totalQuantity;
+        itemCount.textContent = totalQuantity;
+        cartDisplay.classList.toggle("hidden", totalQuantity === 0);
 
-    groupedItems.forEach(item => {
-      total += item.totalPrice;
-      const li = document.createElement("li");
-      li.innerHTML = `
-        <img src="${item.image}" alt="${item.name}" width="70">
-        <div class="item-details">
-          <span class="item-name">${item.name}</span>
-          <span class="item-quantity">Cantitate: ${item.quantity}</span>
-        </div>
-        <span class="item-price">${item.totalPrice.toFixed(0)} MDL</span>
-        <div class="quantity-controls">
-          <button class="decrease-quantity" data-name="${item.name}">−</button>
-          <button class="remove-item" data-name="${item.name}">×</button>
-        </div>
-      `;
-      cartItems.appendChild(li);
+        cartItems.innerHTML = "";
+        let total = 0;
+
+        const cartEmpty = document.getElementById("cart-empty");
+        if (cartEmpty) cartEmpty.style.display = totalQuantity === 0 ? "block" : "none";
+        cartItems.style.display = totalQuantity === 0 ? "none" : "block";
+
+        cart.forEach(item => {
+            const currentName = getProductName(item.key);
+            total += (item.price || 0) * (item.quantity || 0);
+
+            const li = document.createElement("li");
+            li.innerHTML = `
+                <img src="${item.image || ''}" alt="${currentName}">
+                <div class="item-details">
+                    <span class="item-name">${currentName}</span>
+                    <span class="item-quantity">${t('quantity')}: ${item.quantity || 1}</span>
+                </div>
+                <span class="item-price">${((item.price || 0) * (item.quantity || 1)).toFixed(0)} MDL</span>
+                <div class="quantity-controls">
+                    <button class="decrease-quantity" data-key="${item.key}">−</button>
+                    <button class="remove-item" data-key="${item.key}">×</button>
+                </div>
+            `;
+            cartItems.appendChild(li);
+        });
+
+        cartTotal.textContent = total.toFixed(0);
+        localStorage.setItem("cart", JSON.stringify(cart));
+    }
+
+    document.querySelectorAll(".buy-button").forEach(button => {
+        button.addEventListener("click", function () {
+            const key = this.getAttribute("data-key");
+            if (!key) return;
+
+            const price = parseFloat(this.getAttribute("data-price")) || 0;
+            const productCard = this.closest(".product");
+            const image = productCard ? productCard.querySelector("img").src : "";
+
+            const name = getProductName(key);
+
+            const existing = cart.findIndex(item => item.key === key);
+            if (existing !== -1) {
+                cart[existing].quantity = (cart[existing].quantity || 0) + 1;
+            } else {
+                cart.push({ key, name, price, image, quantity: 1 });
+            }
+
+            updateCart();
+            showNotification(t('added_to_cart'));
+        });
     });
 
-    cartTotal.textContent = total.toFixed(0);
-    localStorage.setItem("cart", JSON.stringify(cart));
-  }
+    cartItems.addEventListener("click", function (e) {
+        const key = e.target.getAttribute("data-key");
+        if (!key) return;
 
-  document.querySelectorAll(".buy-button").forEach(button => {
-    button.addEventListener("click", function (e) {
-      e.preventDefault();
-      const productCard = this.closest(".product");
-      const name = this.getAttribute("data-name");
-      const price = parseFloat(this.getAttribute("data-price"));
-      const image = productCard.querySelector("img").src;
-
-      const existingItemIndex = cart.findIndex(item => item.name.toLowerCase() === name.toLowerCase());
-      if (existingItemIndex !== -1) {
-        cart[existingItemIndex].quantity += 1;
-      } else {
-        cart.push({ name, price, image, quantity: 1 });
-      }
-
-      updateCart();
-      showNotification("Produsul a fost adăugat în coș!");
-    });
-  });
-
-  cartItems.addEventListener("click", function (e) {
-    const itemName = e.target.getAttribute("data-name");
-    if (e.target.classList.contains("decrease-quantity")) {
-      const index = cart.findIndex(i => i.name.toLowerCase() === itemName.toLowerCase());
-      if (index !== -1) {
-        cart[index].quantity > 1 ? cart[index].quantity-- : cart.splice(index, 1);
+        if (e.target.classList.contains("decrease-quantity")) {
+            const index = cart.findIndex(i => i.key === key);
+            if (index !== -1) {
+                if (cart[index].quantity > 1) cart[index].quantity--;
+                else cart.splice(index, 1);
+            }
+        } else if (e.target.classList.contains("remove-item")) {
+            cart = cart.filter(i => i.key !== key);
+        }
         updateCart();
-      }
-    } else if (e.target.classList.contains("remove-item")) {
-      cart = cart.filter(i => i.name.toLowerCase() !== itemName.toLowerCase());
-      updateCart();
-    }
-  });
-
-  cartButton.addEventListener("click", function (e) {
-    e.stopPropagation();
-    cartContent.classList.toggle("active");
-  });
-
-  document.addEventListener("click", function () {
-    cartContent.classList.remove("active");
-  });
-
-  cartContent.addEventListener("click", function (e) {
-    e.stopPropagation();
-  });
-
-  clearCartButton.addEventListener("click", function () {
-    cart = [];
-    updateCart();
-  });
-
-  const searchInput = document.querySelector('input[name="search"]');
-  const products = document.querySelectorAll('.product');
-  let searchTimeout;
-
-  function performSearch() {
-    const searchTerm = searchInput.value.toLowerCase().trim();
-    let hasResults = false;
-
-    products.forEach(product => {
-      const name = product.querySelector('h1').textContent.toLowerCase();
-      const desc = product.querySelector('p')?.textContent.toLowerCase() || '';
-      const match = name.includes(searchTerm) || desc.includes(searchTerm);
-      product.style.display = match || searchTerm === '' ? 'flex' : 'none';
-      if (match) hasResults = true;
     });
 
-    if (noResultsMessage) {
-      noResultsMessage.classList.toggle('active', !hasResults && searchTerm !== '');
+    cartButton.addEventListener("click", e => { e.stopPropagation(); cartContent.classList.toggle("active"); });
+    document.addEventListener("click", () => cartContent.classList.remove("active"));
+    if (cartContent) cartContent.addEventListener("click", e => e.stopPropagation());
+
+    clearCartButton.addEventListener("click", () => { cart = []; updateCart(); });
+
+    const searchInput = document.querySelector('input[name="search"]');
+    if (searchInput) {
+        searchInput.addEventListener('input', () => {
+            const term = searchInput.value.toLowerCase().trim();
+            document.querySelectorAll('.product').forEach(p => {
+                const name = p.querySelector('h1').textContent.toLowerCase();
+                p.style.display = term === '' || name.includes(term) ? 'flex' : 'none';
+            });
+        });
     }
-  }
 
-  searchInput.addEventListener('input', function () {
-    clearTimeout(searchTimeout);
-    searchTimeout = setTimeout(performSearch, 300);
-  });
-
-  document.querySelector('.search-form button').addEventListener('click', function (e) {
-    e.preventDefault();
-    performSearch();
-  });
-
-  searchInput.addEventListener('search', function () {
-    if (this.value === '') performSearch();
-  });
-
-  updateCart();
+    updateCart();
 });

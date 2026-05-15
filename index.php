@@ -1,13 +1,17 @@
+<?php 
+require_once 'config.php'; 
+require_once 'language_switcher.php'; 
+?>
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="<?= $lang ?>">
 <head>
     <meta charset="UTF-8">
     <meta name="author" content="Tintiuc Catalin">
-    <meta name="description" content="Magazin online Maison Lure - îmbrăcăminte premium pentru toate stilurile.">
-    <meta name="keywords" content="îmbrăcăminte, tricouri, blugi, hanorace, modă, magazin online, Moldova">
+    <meta name="description" content="Magazin online Maison Lure">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maison Lure | Magazin Online de îmbrăcăminte</title>
+    <title>
+        <?= lang('site_title') ?>
+    </title>
     <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
     <link rel="stylesheet" href="styles.css">
     <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
@@ -20,108 +24,167 @@
 
     <header>
         <div class="header-left">
-            <h1>Maison Lure Magazin de îmbrăcăminte</h1>
+            <h1>Maison Lure</h1>
         </div>
         <form class="search-form">
-            <input type="search" name="search" placeholder="Caută produse...">
+            <input type="search" name="search" placeholder="<?= lang('search_placeholder') ?>">
             <button type="submit"><i class="bx bx-search"></i></button>
         </form>
         <div class="header-right">
-            <a href="login.php" target="_blank" class="login-button"><i class="bx bxs-user"></i> Login</a>
+            <a href="login.php" class="login-button"><i class="bx bxs-user"></i> <?= lang('login') ?></a>
+
             <div class="cart-container">
                 <button class="cart-button"><i class="bx bxs-cart"></i><span id="cart-count"
                         class="hidden">0</span></button>
                 <div class="cart-content">
-                    <h3>Coș de cumpărături</h3>
+                    <h3><?= lang('cart') ?></h3>
                     <div id="cart-empty" class="cart-empty">
                         <i class="bx bxs-cart empty-cart-icon"></i>
-                        <p>Coșul tău este gol. Adaugă produse pentru a începe!</p>
+                        <p><?= lang('empty_cart') ?></p>
                     </div>
                     <ul id="cart-items"></ul>
                     <div class="cart-summary">
-                        <p>Produse: <span id="item-count">0</span></p>
-                        <p>Total: <span id="cart-total">0</span> MDL</p>
+                        <p><?= lang('products') ?>: <span id="item-count">0</span></p>
+                        <p><?= lang('total') ?>: <span id="cart-total">0</span> MDL</p>
                     </div>
-                    <button class="clear-cart">Golește Coșul</button>
+                    <button class="clear-cart"><?= lang('clear_cart') ?></button>
                 </div>
+            </div>
+            <div class="language-switcher">
+                <a href="?lang=ro" class="<?= $lang=='ro'?'active':'' ?>">RO</a>
+                <a href="?lang=en" class="<?= $lang=='en'?'active':'' ?>">EN</a>
+                <a href="?lang=ru" class="<?= $lang=='ru'?'active':'' ?>">RU</a>
             </div>
         </div>
     </header>
 
     <div class="container">
         <div class="product" style="--order: 0;">
-            <img src="images/produse/Tricou Nike Premium.avif" alt="Tricou Nike Premium">
-            <h1>Tricou Nike Premium</h1>
-            <p>Preț: 800 MDL</p>
-            <button class="buy-button" data-name="Tricou Nike Premium" data-price="800">Adaugă în Coș</button>
-        </div>
-        <div class="product" style="--order: 1;">
-            <img src="images/produse/Tricou Polo.avif" alt="Tricou Polo">
-            <h1>Tricou Polo</h1>
-            <p>Preț: 990 MDL</p>
-            <button class="buy-button" data-name="Tricou Polo" data-price="990">Adaugă în Coș</button>
-        </div>
-        <div class="product" style="--order: 2;">
-            <img src="images/produse/Tricou Negru.avif" alt="Tricou Negru">
-            <h1>Tricou Negru</h1>
-            <p>Preț: 320 MDL</p>
-            <button class="buy-button" data-name="Tricou Negru" data-price="320">Adaugă în Coș</button>
-        </div>
-        <div class="product" style="--order: 3;">
-            <img src="images/produse/Blugi Largi.avif" alt="Blugi Largi">
-            <h1>Blugi Largi</h1>
-            <p>Preț: 650 MDL</p>
-            <button class="buy-button" data-name="Blugi Largi" data-price="650">Adaugă în Coș</button>
-        </div>
-        <div class="product" style="--order: 4;">
-            <img src="images/produse/Pantaloni Jack & Lones.avif" alt="Pantaloni Jack & Jones">
-            <h1>Pantaloni Jack & Jones</h1>
-            <p>Preț: 650 MDL</p>
-            <button class="buy-button" data-name="Pantaloni Jack & Jones" data-price="650">Adaugă în Coș</button>
-        </div>
-        <div class="product" style="--order: 5;">
-            <img src="images/produse/Blugi Collusion.avif" alt="Blugi Collusion">
-            <h1>Blugi Collusion</h1>
-            <p>Preț: 630 MDL</p>
-            <button class="buy-button" data-name="Blugi Collusion" data-price="630">Adaugă în Coș</button>
-        </div>
-        <div class="product" style="--order: 6;">
-            <img src="images/produse/Hanorac Dior.avif" alt="Hanorac Dior">
-            <h1>Hanorac Dior</h1>
-            <p>Preț: 700 MDL</p>
-            <button class="buy-button" data-name="Hanorac Dior" data-price="700">Adaugă în Coș</button>
-        </div>
-        <div class="product" style="--order: 7;">
-            <img src="images/produse/Hanorac Weekday.avif" alt="Hanorac Weekday">
-            <h1>Hanorac Weekday</h1>
-            <p>Preț: 900 MDL</p>
-            <button class="buy-button" data-name="Hanorac Weekday" data-price="900">Adaugă în Coș</button>
-        </div>
-        <div class="product" style="--order: 8;">
-            <img src="images/produse/Hanorac Adidas.avif" alt="Hanorac Adidas">
-            <h1>Hanorac Adidas</h1>
-            <p>Preț: 1200 MDL</p>
-            <button class="buy-button" data-name="Hanorac Adidas" data-price="1200">Adaugă în Coș</button>
-        </div>
-        <div class="product" style="--order: 9;">
-            <img src="images/produse/NewBalance 9060.avif" alt="New Balance 9060">
-            <h1>New Balance 9060</h1>
-            <p>Preț: 3400 MDL</p>
-            <button class="buy-button" data-name="New Balance 9060" data-price="3400">Adaugă în Coș</button>
-        </div>
-        <div class="product" style="--order: 10;">
-            <img src="images/produse/Nike V2K Run.avif" alt="Nike V2K Run">
-            <h1>Nike V2K Run</h1>
-            <p>Preț: 2500 MDL</p>
-            <button class="buy-button" data-name="Nike V2K Run" data-price="2500">Adaugă în Coș</button>
-        </div>
-        <div class="product" style="--order: 11;">
-            <img src="images/produse/Adidas Samba.avif" alt="Adidas Samba">
-            <h1>Adidas Samba</h1>
-            <p>Preț: 2000 MDL</p>
-            <button class="buy-button" data-name="Adidas Samba" data-price="2000">Adaugă în Coș</button>
-        </div>
+    <img src="images/produse/Tricou Nike Premium.avif" alt="<?= lang('name_product_1') ?>">
+    <h1><?= lang('name_product_1') ?></h1>
+    <p><?= lang('price') ?> 800 MDL</p>
+    <button class="buy-button" data-key="name_product_1" data-price="800">
+        <?= lang('add_to_cart') ?>
+    </button>
+</div>
+
+<div class="product" style="--order: 1;">
+    <img src="images/produse/Tricou Polo.avif" alt="<?= lang('name_product_2') ?>">
+    <h1><?= lang('name_product_2') ?></h1>
+    <p><?= lang('price') ?> 990 MDL</p>
+    <button class="buy-button" data-key="name_product_2" data-price="990">
+        <?= lang('add_to_cart') ?>
+    </button>
+</div>
+
+<div class="product" style="--order: 2;">
+    <img src="images/produse/Tricou Negru.avif" alt="<?= lang('name_product_3') ?>">
+    <h1><?= lang('name_product_3') ?></h1>
+    <p><?= lang('price') ?> 320 MDL</p>
+    <button class="buy-button" data-key="name_product_3" data-price="320">
+        <?= lang('add_to_cart') ?>
+    </button>
+</div>
+
+<div class="product" style="--order: 3;">
+    <img src="images/produse/Blugi Largi.avif" alt="<?= lang('name_product_4') ?>">
+    <h1><?= lang('name_product_4') ?></h1>
+    <p><?= lang('price') ?> 650 MDL</p>
+    <button class="buy-button" data-key="name_product_4" data-price="650">
+        <?= lang('add_to_cart') ?>
+    </button>
+</div>
+
+<div class="product" style="--order: 4;">
+    <img src="images/produse/Pantaloni Jack & Lones.avif" alt="<?= lang('name_product_5') ?>">
+    <h1><?= lang('name_product_5') ?></h1>
+    <p><?= lang('price') ?> 650 MDL</p>
+    <button class="buy-button" data-key="name_product_5" data-price="650">
+        <?= lang('add_to_cart') ?>
+    </button>
+</div>
+
+<div class="product" style="--order: 5;">
+    <img src="images/produse/Blugi Collusion.avif" alt="<?= lang('name_product_6') ?>">
+    <h1><?= lang('name_product_6') ?></h1>
+    <p><?= lang('price') ?> 630 MDL</p>
+    <button class="buy-button" data-key="name_product_6" data-price="630">
+        <?= lang('add_to_cart') ?>
+    </button>
+</div>
+
+<div class="product" style="--order: 6;">
+    <img src="images/produse/Hanorac Dior.avif" alt="<?= lang('name_product_7') ?>">
+    <h1><?= lang('name_product_7') ?></h1>
+    <p><?= lang('price') ?> 700 MDL</p>
+    <button class="buy-button" data-key="name_product_7" data-price="700">
+        <?= lang('add_to_cart') ?>
+    </button>
+</div>
+
+<div class="product" style="--order: 7;">
+    <img src="images/produse/Hanorac Weekday.avif" alt="<?= lang('name_product_8') ?>">
+    <h1><?= lang('name_product_8') ?></h1>
+    <p><?= lang('price') ?> 900 MDL</p>
+    <button class="buy-button" data-key="name_product_8" data-price="900">
+        <?= lang('add_to_cart') ?>
+    </button>
+</div>
+
+<div class="product" style="--order: 8;">
+    <img src="images/produse/Hanorac Adidas.avif" alt="<?= lang('name_product_9') ?>">
+    <h1><?= lang('name_product_9') ?></h1>
+    <p><?= lang('price') ?> 1200 MDL</p>
+    <button class="buy-button" data-key="name_product_9" data-price="1200">
+        <?= lang('add_to_cart') ?>
+    </button>
+</div>
+
+<div class="product" style="--order: 9;">
+    <img src="images/produse/NewBalance 9060.avif" alt="<?= lang('name_product_10') ?>">
+    <h1><?= lang('name_product_10') ?></h1>
+    <p><?= lang('price') ?> 3400 MDL</p>
+    <button class="buy-button" data-key="name_product_10" data-price="3400">
+        <?= lang('add_to_cart') ?>
+    </button>
+</div>
+
+<div class="product" style="--order: 10;">
+    <img src="images/produse/Nike V2K Run.avif" alt="<?= lang('name_product_11') ?>">
+    <h1><?= lang('name_product_11') ?></h1>
+    <p><?= lang('price') ?> 2500 MDL</p>
+    <button class="buy-button" data-key="name_product_11" data-price="2500">
+        <?= lang('add_to_cart') ?>
+    </button>
+</div>
+
+<div class="product" style="--order: 11;">
+    <img src="images/produse/Adidas Samba.avif" alt="<?= lang('name_product_12') ?>">
+    <h1><?= lang('name_product_12') ?></h1>
+    <p><?= lang('price') ?> 2000 MDL</p>
+    <button class="buy-button" data-key="name_product_12" data-price="2000">
+        <?= lang('add_to_cart') ?>
+    </button>
+</div>
     </div>
+
+    <script>
+    window.productNames = {
+        "name_product_1":  "<?= addslashes(lang('name_product_1')) ?>",
+        "name_product_2":  "<?= addslashes(lang('name_product_2')) ?>",
+        "name_product_3":  "<?= addslashes(lang('name_product_3')) ?>",
+        "name_product_4":  "<?= addslashes(lang('name_product_4')) ?>",
+        "name_product_5":  "<?= addslashes(lang('name_product_5')) ?>",
+        "name_product_6":  "<?= addslashes(lang('name_product_6')) ?>",
+        "name_product_7":  "<?= addslashes(lang('name_product_7')) ?>",
+        "name_product_8":  "<?= addslashes(lang('name_product_8')) ?>",
+        "name_product_9":  "<?= addslashes(lang('name_product_9')) ?>",
+        "name_product_10": "<?= addslashes(lang('name_product_10')) ?>",
+        "name_product_11": "<?= addslashes(lang('name_product_11')) ?>",
+        "name_product_12": "<?= addslashes(lang('name_product_12')) ?>"
+    };
+    console.log("Product names loaded:", window.productNames);
+    </script>
 
     <div id="chrome-footer">
         <footer class="Va6oZkc" data-testid="footer">
@@ -242,7 +305,7 @@
             </div>
             <div class="qHG1XBy fVdHxMU">
                 <div class="IA4t6xg" data-testid="legalbar">
-                    <p class="p4s35il">© <!-- -->2025<!-- --> Maison Lure</p>
+                    <p class="p4s35il">© <!-- -->2026<!-- --> Maison Lure</p>
                     <ul class="zikOExT">
                         <li><a href="#">Maison Lure details</a><span class="E1LOrCT" aria-hidden="true"></span></li>
                         <li><a href="#">Privacy &amp; Cookies</a><span class="E1LOrCT" aria-hidden="true"></span></li>

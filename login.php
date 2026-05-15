@@ -1,5 +1,6 @@
 <?php
-session_start();
+require_once 'config.php';
+require_once 'language_switcher.php';
 
 $errors = [
     'login' => $_SESSION['login_error'] ?? '',
@@ -9,24 +10,21 @@ $activeForm = $_SESSION['active_form'] ?? 'login';
 
 session_unset();
 
-function showError($error)
-{
+function showError($error) {
     return !empty($error) ? "<p class=\"error-message\">$error</p>" : '';
 }
 
-function isActiveForm($formName, $activeForm)
-{
+function isActiveForm($formName, $activeForm) {
     return $formName === $activeForm ? 'active' : '';
 }
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="<?= $lang ?>">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maison Lure | Login & Registration</title>
+    <title><?= lang('site_title') ?> | <?= lang('login') ?></title>
     <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
     <link rel="stylesheet" href="login.css">
     <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
@@ -34,12 +32,12 @@ function isActiveForm($formName, $activeForm)
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
     <link rel="manifest" href="images/favicon/site.webmanifest">
 </head>
-
 <body>
     <div class="container">
+        <!-- Form Login -->
         <div class="form-box login <?= isActiveForm('login', $activeForm); ?>">
             <form action="login_register.php" method="post">
-                <h1>Login</h1>
+                <h1><?= lang('login') ?></h1>
                 <?= showError($errors['login']); ?>
                 <div class="input-box">
                     <input type="email" name="email" placeholder="Email" required>
@@ -50,26 +48,26 @@ function isActiveForm($formName, $activeForm)
                     <i class="bx bxs-lock-alt"></i>
                 </div>
                 <div class="forgot-link">
-                    <a href="#">Forgot password?</a>
+                    <a href="#"><?= lang('forgot_password') ?></a>
                 </div>
-                <button type="submit" name="login" class="btn">Login</button>
-                <p>or login with social platforms</p>
+                <button type="submit" name="login" class="btn"><?= lang('login') ?></button>
+                <p><?= lang('or_login_with_social') ?? 'sau autentifică-te cu' ?></p>
                 <div class="social-icons">
                     <a href="#"><i class="bx bxl-google"></i></a>
                     <a href="#"><i class="bx bxl-facebook"></i></a>
                     <a href="#"><i class="bx bxl-github"></i></a>
                     <a href="#"><i class="bx bxl-linkedin"></i></a>
                 </div>
-                <input type="hidden" name="csrf_token" value="<?= bin2hex(random_bytes(32)); ?>">
             </form>
         </div>
 
+        <!-- Form Register -->
         <div class="form-box register <?= isActiveForm('register', $activeForm); ?>">
             <form action="login_register.php" method="post">
-                <h1>Registration</h1>
+                <h1><?= lang('register') ?></h1>
                 <?= showError($errors['register']); ?>
                 <div class="input-box">
-                    <input type="text" name="name" placeholder="Username" required>
+                    <input type="text" name="name" placeholder="Nume" required>
                     <i class="bx bxs-user"></i>
                 </div>
                 <div class="input-box">
@@ -80,32 +78,31 @@ function isActiveForm($formName, $activeForm)
                     <input type="password" name="password" placeholder="Password" required>
                     <i class="bx bxs-lock-alt"></i>
                 </div>
-                <button type="submit" name="register" class="btn">Continue</button>
-                <p>or register with social platforms</p>
+                <button type="submit" name="register" class="btn"><?= lang('register') ?></button>
+                <p><?= lang('or_login_with_social') ?? 'sau înregistrează-te cu' ?></p>
                 <div class="social-icons">
                     <a href="#"><i class="bx bxl-google"></i></a>
                     <a href="#"><i class="bx bxl-facebook"></i></a>
                     <a href="#"><i class="bx bxl-github"></i></a>
                     <a href="#"><i class="bx bxl-linkedin"></i></a>
                 </div>
-                <input type="hidden" name="csrf_token" value="<?= bin2hex(random_bytes(32)); ?>">
             </form>
         </div>
 
         <div class="toggle-box">
             <div class="toggle-panel toggle-left">
-                <h1>Hello, Welcome!</h1>
-                <p>New to Maison Lure?</p>
-                <button class="btn register-btn">Create an account</button>
+                <h1><?= lang('hello_welcome') ?></h1>
+                <p><?= lang('new_here') ?></p>
+                <button class="btn register-btn"><?= lang('create_account') ?></button>
             </div>
             <div class="toggle-panel toggle-right">
-                <h1>Welcome Back!</h1>
-                <p>Do you already have an account?</p>
-                <button class="btn login-btn">Login</button>
+                <h1><?= lang('welcome_back') ?></h1>
+                <p><?= lang('have_account') ?></p>
+                <button class="btn login-btn"><?= lang('login') ?></button>
             </div>
         </div>
     </div>
+
     <script src="login.js"></script>
 </body>
-
 </html>

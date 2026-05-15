@@ -1,4 +1,21 @@
 <?php
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+if (!isset($_SESSION['lang'])) {
+    $_SESSION['lang'] = 'ro';
+}
+
+if (isset($_GET['lang']) && in_array($_GET['lang'], ['ro', 'en', 'ru'])) {
+    $_SESSION['lang'] = $_GET['lang'];
+    setcookie('lang', $_SESSION['lang'], time() + (86400 * 30), "/");
+}
+
+$lang = $_SESSION['lang'];
+$translations = json_decode(file_get_contents(__DIR__ . "/languages/{$lang}.json"), true);
+
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -22,6 +39,6 @@ try {
     ");
 } catch (PDOException $e) {
     error_log("Connection failed: " . $e->getMessage());
-    die("A apărut o eroare la conectarea la baza de date. Vă rugăm să încercați din nou mai târziu.");
+    die("A apărut o eroare la conectarea la baza de date.");
 }
 ?>
