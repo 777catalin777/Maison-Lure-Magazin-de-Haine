@@ -16,32 +16,21 @@ if (isset($_GET['lang']) && in_array($_GET['lang'], ['ro', 'en', 'ru'])) {
 $lang = $_SESSION['lang'];
 $translations = json_decode(file_get_contents(__DIR__ . "/languages/{$lang}.json"), true);
 
-$servername = "localhost";
-$username = "icei_41928949";
-$password = "Catalinbabamasa";
-$dbname = "icei_41928949_maisonlure_db";
+$servername = "dpg-d83pq1eq1p3s738amib0-a";
+$port = "5432";
+$username = "maisonlure_db_user";
+$password = "HgknhsihFQZHXXY2INwpSOwdephFHBJP";
+$dbname = "maisonlure_db";
 
 try {
-    $conn = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8mb4", $username, $password);
+    $conn = new PDO("pgsql:host=$host;port=$port;dbname=$dbname", $user, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $conn->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-    $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+    $conn->exec("SET NAMES 'utf8'");
 
-    $conn->exec("
-        CREATE TABLE IF NOT EXISTS users (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            name VARCHAR(50) NOT NULL,
-            email VARCHAR(100) NOT NULL UNIQUE,
-            password VARCHAR(255) NOT NULL,
-            role ENUM('user', 'admin') DEFAULT 'user',
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        )
-    ");
-} catch (PDOException $e) {
+} catch(PDOException $e) {
     error_log("Connection failed: " . $e->getMessage());
-    die("A apărut o eroare la conectarea la baza de date.");
+    $conn = null;
+    echo "<!-- Eroare BD: " . htmlspecialchars($e->getMessage()) . " -->";
 }
 
-$conn = null;
-error_log("Database connection disabled for now.");
 ?>
