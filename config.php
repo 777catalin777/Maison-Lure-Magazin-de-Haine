@@ -17,9 +17,9 @@ $lang = $_SESSION['lang'];
 $translations = json_decode(file_get_contents(__DIR__ . "/languages/{$lang}.json"), true);
 
 $servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "maison_lure";
+$username = "icei_41928949";
+$password = "Catalinbabamasa";
+$dbname = "icei_41928949_maisonlure_db";
 
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8mb4", $username, $password);

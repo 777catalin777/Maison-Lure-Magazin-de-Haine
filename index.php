@@ -96,7 +96,7 @@ require_once 'language_switcher.php';
 </div>
 
 <div class="product" style="--order: 4;">
-    <img src="images/produse/Pantaloni Jack & Lones.avif" alt="<?= lang('name_product_5') ?>">
+    <img src="images/produse/Pantaloni Jack & Jones.avif" alt="<?= lang('name_product_5') ?>">
     <h1><?= lang('name_product_5') ?></h1>
     <p><?= lang('price') ?> 650 MDL</p>
     <button class="buy-button" data-key="name_product_5" data-price="650">
