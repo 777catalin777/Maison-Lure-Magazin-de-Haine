@@ -41,4 +41,7 @@ try {
     error_log("Connection failed: " . $e->getMessage());
     die("A apărut o eroare la conectarea la baza de date.");
 }
+
+$conn = null;
+error_log("Database connection disabled for now.");
 ?>
