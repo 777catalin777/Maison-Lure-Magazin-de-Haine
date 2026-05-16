@@ -79,7 +79,7 @@ function isActiveForm($formName, $activeForm) {
                     <i class="bx bxs-lock-alt"></i>
                 </div>
                 <button type="submit" name="register" class="btn"><?= lang('register') ?></button>
-                <p><?= lang('or_login_with_social') ?? 'sau înregistrează-te cu' ?></p>
+                <p><?= lang('or_login_with_social') ?? 'sau conecteză-te cu' ?></p>
                 <div class="social-icons">
                     <a href="#"><i class="bx bxl-google"></i></a>
                     <a href="#"><i class="bx bxl-facebook"></i></a>
