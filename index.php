@@ -31,7 +31,7 @@ require_once 'language_switcher.php';
             <button type="submit"><i class="bx bx-search"></i></button>
         </form>
         <div class="header-right">
-            <a href="login.php" class="login-button"><i class="bx bxs-user"></i> <?= lang('login') ?></a>
+            <a href="login.php" target="_blank" class="login-button"><i class="bx bxs-user"></i> <?= lang('login') ?></a>
 
             <div class="cart-container">
                 <button class="cart-button"><i class="bx bxs-cart"></i><span id="cart-count"
