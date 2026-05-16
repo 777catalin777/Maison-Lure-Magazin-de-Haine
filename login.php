@@ -75,7 +75,7 @@ function isActiveForm($formName, $activeForm) {
                     <i class="bx bxs-envelope"></i>
                 </div>
                 <div class="input-box">
-                    <input type="password" name="password" placeholder="Password" required>
+                    <input type="password" name="password" placeholder="Parolă" required>
                     <i class="bx bxs-lock-alt"></i>
                 </div>
                 <button type="submit" name="register" class="btn"><?= lang('register') ?></button>
